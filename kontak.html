@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kirim Masukan — Desa Sepadu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eaf9ee, #d4efdc, #b8e0c4);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: inline-block;
+            color: #2d5a3d;
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2d5a3d;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a3d24;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #b8d4bc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.02);
+        }
+
+        .alert {
+            margin-top: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .alert.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .required {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Kembali ke Beranda</a>
+        
+        <div class="card">
+            <h2>📝 Kirim Masukan</h2>
+            
+            <form id="formMasukan">
+                <label>Nama Lengkap <span class="required">*</span></label>
+                <input type="text" id="nama" required placeholder="Masukkan nama Anda">
+
+                <label>Email <span class="required">*</span></label>
+                <input type="email" id="email" required placeholder="email@contoh.com">
+
+                <label>Nomor HP</label>
+                <input type="tel" id="hp" placeholder="08xx-xxxx-xxxx">
+
+                <label>Pesan / Masukan <span class="required">*</span></label>
+                <textarea id="pesan" rows="5" required placeholder="Tuliskan saran, kritik, atau pertanyaan Anda..."></textarea>
+
+                <button type="submit">📤 Kirim Masukan</button>
+            </form>
+
+            <div id="pesanAlert" class="alert"></div>
+        </div>
+    </div>
+
+    <script>
+        // === GANTI LINK INI DENGAN LINK API KAMU DARI GOOGLE APPS SCRIPT ===
+        const API_URL = "https://script.google.com/macros/s/AKfycbwaicq95tPs66Hi7-9k0J9S_UrzXbDr-gLBmlizjjm9_cVQ8XAfMkPPkfMK1b7L_I6TXQ/exec";
+
+        const form = document.getElementById('formMasukan');
+        const alertBox = document.getElementById('pesanAlert');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            alertBox.style.display = "none";
+            
+            const formData = new URLSearchParams();
+            formData.append('action', 'kirim');
+            formData.append('nama', document.getElementById('nama').value);
+            formData.append('email', document.getElementById('email').value);
+            formData.append('hp', document.getElementById('hp').value);
+            formData.append('pesan', document.getElementById('pesan').value);
+
+            try {
+                const res = await fetch(API_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                alertBox.className = "alert success";
+                alertBox.innerHTML = "✅ Berhasil terkirim! Terima kasih atas masukan Anda.";
+                alertBox.style.display = "block";
+                form.reset();
+                
+            } catch (error) {
+                alertBox.className = "alert error";
+                alertBox.innerHTML = "❌ Gagal mengirim. Silakan coba lagi.";
+                alertBox.style.display = "block";
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
