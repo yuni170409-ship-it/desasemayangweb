@@ -200,26 +200,33 @@
 
         // === KIRIM RESPON KE GOOGLE SHEETS ===
         async function kirimRespon() {
-            const token = document.getElementById('tokenAduan').value;
-            const respon = document.getElementById('balasanTeks').value;
+    const token = document.getElementById('tokenAduan').value;
+    const respon = document.getElementById('balasanTeks').value;
 
-            if (!respon) {
-                alert("⚠️ Tuliskan tanggapannya terlebih dahulu!");
-                return;
-            }
+    if (!respon) {
+        alert("⚠️ Tuliskan tanggapannya terlebih dahulu!");
+        return;
+    }
 
-            try {
-                await fetch(API_URL, {
-                    method: 'PUT',
-                    body: JSON.stringify({ token: token, respon: respon })
-                });
-                alert("✅ Respon tersimpan! Masyarakat bisa cek status dengan tokennya.");
-                tutupModal();
-                muatData();
-            } catch (error) {
-                alert("❌ Gagal menyimpan!");
-                console.error(error);
-            }
+    try {
+        const formData = new URLSearchParams();
+        formData.append('action', 'simpanRespon');
+        formData.append('token', token);
+        formData.append('respon', respon);
+
+        const res = await fetch(API_URL, {
+            method: 'POST',
+            body: formData
+        });
+        
+        alert("✅ Respon tersimpan!");
+        tutupModal();
+        muatData();
+    } catch (error) {
+        alert("❌ Gagal menyimpan! Error: " + error.message);
+        console.error(error);
+    }
+}
         }
     </script>
 </body>
