@@ -18,10 +18,9 @@
             padding: 20px;
         }
 
-        .hidden {
-            display: none !important;
-        }
+        .hidden { display: none !important; }
 
+        /* === HALAMAN LOGIN === */
         .login-card {
             max-width: 400px;
             margin: 100px auto;
@@ -58,6 +57,7 @@
             cursor: pointer;
         }
 
+        /* === HALAMAN ADMIN === */
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -72,6 +72,7 @@
 
         .header h1 {
             color: #2d5a3d;
+            font-size: 22px;
         }
 
         .btn-keluar {
@@ -99,16 +100,10 @@
             font-weight: 600;
         }
 
-        .stat-card.yellow {
-            background: #fff3cd;
-            color: #856404;
-        }
+        .stat-card.yellow { background: #fff3cd; color: #856404; }
+        .stat-card.green { background: #d4edda; color: #155724; }
 
-        .stat-card.green {
-            background: #d4edda;
-            color: #155724;
-        }
-
+        /* === TABEL === */
         table {
             width: 100%;
             background: white;
@@ -129,45 +124,50 @@
             padding: 12px 10px;
             border-bottom: 1px solid #eee;
             font-size: 14px;
+            vertical-align: middle;
         }
 
         .status-belum {
             background: #fff3cd;
             color: #856404;
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 20px;
             font-size: 13px;
             font-weight: 600;
+            display: inline-block;
         }
 
         .status-sudah {
             background: #d4edda;
             color: #155724;
-            padding: 4px 10px;
+            padding: 5px 12px;
             border-radius: 20px;
             font-size: 13px;
             font-weight: 600;
+            display: inline-block;
         }
 
-        .btn-primary {
-            padding: 6px 12px;
+        /* === TOMBOL RESPON — LEBIH BESAR & JELAS === */
+        .btn-respon {
+            padding: 8px 14px;
             background: #007bff;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 13px;
-            margin-right: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
         }
 
-        .btn-success {
-            padding: 6px 12px;
-            background: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 13px;
+        .btn-respon:hover {
+            background: #0056b3;
+        }
+
+        .btn-sudah {
+            color: #28a745;
+            font-size: 14px;
+            font-weight: 600;
         }
 
         .error-msg {
@@ -176,6 +176,7 @@
             color: #dc3545;
         }
 
+        /* === MODAL === */
         .modal {
             display: none;
             position: fixed;
@@ -186,11 +187,10 @@
             background: rgba(0,0,0,0.5);
             justify-content: center;
             align-items: center;
+            z-index: 999;
         }
 
-        .modal.show {
-            display: flex;
-        }
+        .modal.show { display: flex; }
 
         .modal-content {
             background: white;
@@ -207,11 +207,12 @@
 
         textarea {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             border: 2px solid #ddd;
             border-radius: 6px;
             margin-bottom: 15px;
             min-height: 100px;
+            font-size: 14px;
         }
 
         .modal-buttons {
@@ -221,21 +222,21 @@
 
         .modal-buttons button {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 15px;
         }
 
-        .btn-batal {
-            background: #e9ecef;
-        }
+        .btn-batal { background: #e9ecef; }
+        .btn-simpan { background: #28a745; color: white; }
     </style>
 </head>
 <body>
 
-    <!-- HALAMAN LOGIN -->
+    <!-- === HALAMAN LOGIN === -->
     <div id="halamanLogin">
         <div class="login-card">
             <h2>🔐 Admin Masukan</h2>
@@ -244,7 +245,7 @@
         </div>
     </div>
 
-    <!-- HALAMAN ADMIN -->
+    <!-- === HALAMAN ADMIN === -->
     <div id="halamanAdmin" class="hidden">
         <div class="container">
             <div class="header">
@@ -257,7 +258,7 @@
                 <div class="stat-card green" id="jumSudah">Sudah Direspon: 0</div>
             </div>
 
-            <table id="tabelData">
+            <table>
                 <thead>
                     <tr>
                         <th>No</th>
@@ -275,23 +276,23 @@
         </div>
     </div>
 
-    <!-- MODAL BALASAN -->
+    <!-- === MODAL TULIS RESPON === -->
     <div id="modalBalas" class="modal">
         <div class="modal-content">
             <h3>💬 Berikan Tanggapan</h3>
             <input type="hidden" id="noAduan">
-            <textarea id="balasanTeks" placeholder="Tuliskan tanggapan/balasan untuk masyarakat..."></textarea>
+            <textarea id="balasanTeks" placeholder="Tuliskan tanggapan untuk masyarakat..."></textarea>
             <div class="modal-buttons">
                 <button class="btn-batal" onclick="tutupModal()">Batal</button>
-                <button class="btn-success" onclick="kirimRespon()">Simpan Respon</button>
+                <button class="btn-simpan" onclick="kirimRespon()">✅ Simpan Respon</button>
             </div>
         </div>
     </div>
 
     <script>
-        // === PENGATURAN ===
-        const KATA_SANDI_ADMIN = "desa123"; // ✅ Ganti dengan kata sandi kamu sendiri!
-        const API_URL = "https://script.google.com/macros/s/AKfycbxDtxL2kZtrPfxJHu7GNVrsGwVmuJgSpFc_tQIGBM0ffaax3AKBwQ3UWeNdGQ0wD89T1A/exec"; // ⚠️ Ganti dengan link API kamu!
+        // === GANTI KATA SANDI & LINK API DI SINI ===
+        const KATA_SANDI_ADMIN = "desa123";
+        const API_URL = "https://script.google.com/macros/s/AKfycbxxxxxxxxx/exec"; // ⚠️ Ganti link API kamu!
 
         let semuaData = [];
 
@@ -314,14 +315,11 @@
             document.getElementById('kataSandi').value = "";
         }
 
-        // === MUAT DATA DARI GOOGLE SHEETS ===
+        // === AMBIL DATA DARI GOOGLE SHEETS ===
         async function muatData() {
             try {
                 const res = await fetch(API_URL);
                 const hasil = await res.json();
-                
-                if (hasil.error) throw hasil.error;
-                
                 semuaData = hasil.data || [];
                 tampilkanData();
             } catch (error) {
@@ -331,7 +329,7 @@
             }
         }
 
-        // === TAMPILKAN DATA KE TABEL ===
+        // === TAMPILKAN DATA DENGAN TOMBOL JELAS ===
         function tampilkanData() {
             const tbody = document.getElementById('isiTabel');
             let html = "";
@@ -343,15 +341,19 @@
 
                 html += `
                     <tr>
-                        <td>${item.no}</td>
-                        <td><strong>${item.nama}</strong><br><small>${item.email || ''}<br>${item.hp || ''}</small></td>
-                        <td>${item.pesan}</td>
+                        <td><strong>${item.no}</strong></td>
+                        <td>
+                            <strong>${item.nama}</strong><br>
+                            <small>${item.email || ''}</small><br>
+                            <small>${item.hp || ''}</small>
+                        </td>
+                        <td style="max-width:200px;">${item.pesan}</td>
                         <td>${item.tanggal}</td>
                         <td><span class="${item.status === 'Belum Direspon' ? 'status-belum' : 'status-sudah'}">${item.status}</span></td>
                         <td>
                             ${item.status === 'Belum Direspon' 
-                                ? `<button class="btn-primary" onclick="bukaModal(${index})">✍️ Beri Respon</button>`
-                                : `<span style="color:#28a745;font-size:13px;">✅ Sudah Dibalas</span>`
+                                ? `<button class="btn-respon" onclick="bukaModal(${index})">✍️ Beri Respon</button>`
+                                : `<span class="btn-sudah">✅ Sudah Dibalas</span>`
                             }
                         </td>
                     </tr>
@@ -363,18 +365,19 @@
             document.getElementById('jumSudah').textContent = `Sudah Direspon: ${sudah}`;
         }
 
-        // === MODAL ===
+        // === BUKA KOTAK TULIS RESPON ===
         function bukaModal(index) {
             document.getElementById('noAduan').value = semuaData[index].no;
             document.getElementById('modalBalas').classList.add('show');
         }
 
+        // === TUTUP KOTAK ===
         function tutupModal() {
             document.getElementById('modalBalas').classList.remove('show');
             document.getElementById('balasanTeks').value = "";
         }
 
-        // === KIRIM RESPON KE GOOGLE SHEETS ===
+        // === SIMPAN RESPON KE GOOGLE SHEETS ===
         async function kirimRespon() {
             const no = document.getElementById('noAduan').value;
             const balasan = document.getElementById('balasanTeks').value;
