@@ -3,253 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin — Masukan Masyarakat Desa Sepadu</title>
+    <title>Admin — Aduan Masyarakat Desa Sepadu</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #eaf9ee, #d4efdc);
-            padding: 20px;
-        }
-
-        .hidden { display: none !important; }
-
-        /* === HALAMAN LOGIN === */
-        .login-card {
-            max-width: 400px;
-            margin: 100px auto;
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        .login-card h2 {
-            color: #2d5a3d;
-            margin-bottom: 25px;
-        }
-
-        .login-card input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 2px solid #b8d4bc;
-            border-radius: 8px;
-            font-size: 15px;
-        }
-
-        .login-card button {
-            width: 100%;
-            padding: 12px;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* === HALAMAN ADMIN === */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            color: #2d5a3d;
-            font-size: 22px;
-        }
-
-        .btn-keluar {
-            padding: 10px 20px;
-            background: #dc3545;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .stat-card {
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 18px;
-            font-weight: 600;
-        }
-
-        .stat-card.yellow { background: #fff3cd; color: #856404; }
-        .stat-card.green { background: #d4edda; color: #155724; }
-
-        /* === TABEL === */
-        table {
-            width: 100%;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-
-        th {
-            background: #2d5a3d;
-            color: white;
-            padding: 14px 10px;
-            text-align: left;
-            font-size: 14px;
-        }
-
-        td {
-            padding: 12px 10px;
-            border-bottom: 1px solid #eee;
-            font-size: 14px;
-            vertical-align: middle;
-        }
-
-        .status-belum {
-            background: #fff3cd;
-            color: #856404;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            display: inline-block;
-        }
-
-        .status-sudah {
-            background: #d4edda;
-            color: #155724;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            display: inline-block;
-        }
-
-        /* === TOMBOL RESPON — LEBIH BESAR & JELAS === */
-        .btn-respon {
-            padding: 8px 14px;
-            background: #007bff;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
-        .btn-respon:hover {
-            background: #0056b3;
-        }
-
-        .btn-sudah {
-            color: #28a745;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .error-msg {
-            text-align: center;
-            padding: 30px;
-            color: #dc3545;
-        }
-
-        /* === MODAL === */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-        }
-
-        .modal.show { display: flex; }
-
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 450px;
-        }
-
-        .modal-content h3 {
-            margin-bottom: 20px;
-            color: #2d5a3d;
-        }
-
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            min-height: 100px;
-            font-size: 14px;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .modal-buttons button {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 15px;
-        }
-
-        .btn-batal { background: #e9ecef; }
-        .btn-simpan { background: #28a745; color: white; }
+        * {margin: 0;padding: 0;box-sizing: border-box;font-family: 'Segoe UI', sans-serif;}
+        body {min-height: 100vh;background: linear-gradient(135deg, #eaf9ee, #d4efdc);padding: 20px;}
+        .hidden {display: none !important;}
+        
+        /* LOGIN */
+        .login-card {max-width: 400px;margin: 100px auto;background: white;padding: 30px;border-radius: 16px;box-shadow: 0 4px 20px rgba(0,0,0,0.1);text-align: center;}
+        .login-card h2 {color: #2d5a3d;margin-bottom: 25px;}
+        .login-card input {width: 100%;padding: 12px;margin-bottom: 20px;border: 2px solid #b8d4bc;border-radius: 8px;font-size: 15px;}
+        .login-card button {width: 100%;padding: 12px;background: #4CAF50;color: white;border: none;border-radius: 8px;font-size: 16px;font-weight: 600;cursor: pointer;}
+        
+        /* ADMIN */
+        .container {max-width: 1100px;margin: 0 auto;}
+        .header {display: flex;justify-content: space-between;align-items: center;margin-bottom: 30px;}
+        .header h1 {color: #2d5a3d;font-size: 22px;}
+        .btn-keluar {padding: 10px 20px;background: #dc3545;color: white;border: none;border-radius: 6px;cursor: pointer;font-weight: 600;}
+        
+        .stats {display: grid;grid-template-columns: 1fr 1fr;gap: 20px;margin-bottom: 30px;}
+        .stat-card {padding: 20px;border-radius: 10px;text-align: center;font-size: 18px;font-weight: 600;}
+        .stat-card.yellow {background: #fff3cd;color: #856404;}
+        .stat-card.green {background: #d4edda;color: #155724;}
+        
+        table {width: 100%;background: white;border-radius: 12px;overflow: hidden;box-shadow: 0 2px 10px rgba(0,0,0,0.05);}
+        th {background: #2d5a3d;color: white;padding: 14px 8px;text-align: left;font-size: 13px;white-space: nowrap;}
+        td {padding: 12px 8px;border-bottom: 1px solid #eee;font-size: 13px;vertical-align: middle;}
+        
+        .token {font-family: monospace;background: #f0f0f0;padding: 3px 8px;border-radius: 4px;font-weight: bold;color: #d63384;}
+        .status-belum {background: #fff3cd;color: #856404;padding: 4px 10px;border-radius: 20px;font-size: 12px;font-weight: 600;display: inline-block;}
+        .status-sudah {background: #d4edda;color: #155724;padding: 4px 10px;border-radius: 20px;font-size: 12px;font-weight: 600;display: inline-block;}
+        .btn-respon {padding: 7px 12px;background: #007bff;color: white;border: none;border-radius: 5px;cursor: pointer;font-size: 13px;font-weight: 600;}
+        .btn-sudah {color: #28a745;font-size: 13px;font-weight: 600;}
+        .error-msg {text-align: center;padding: 30px;color: #dc3545;}
+        
+        /* MODAL */
+        .modal {display: none;position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.5);justify-content: center;align-items: center;z-index: 999;}
+        .modal.show {display: flex;}
+        .modal-content {background: white;padding: 30px;border-radius: 12px;width: 90%;max-width: 480px;}
+        .modal-content h3 {margin-bottom: 20px;color: #2d5a3d;}
+        .detail-info {background: #f9f9f9;padding: 12px;border-radius: 6px;margin-bottom: 15px;font-size: 14px;}
+        textarea {width: 100%;padding: 12px;border: 2px solid #ddd;border-radius: 6px;margin-bottom: 15px;min-height: 100px;font-size: 14px;}
+        .modal-buttons {display: flex;gap: 10px;}
+        .modal-buttons button {flex: 1;padding: 12px;border: none;border-radius: 6px;cursor: pointer;font-weight: 600;font-size: 15px;}
+        .btn-batal {background: #e9ecef;}
+        .btn-simpan {background: #28a745;color: white;}
     </style>
 </head>
 <body>
 
-    <!-- === HALAMAN LOGIN === -->
+    <!-- LOGIN -->
     <div id="halamanLogin">
         <div class="login-card">
-            <h2>🔐 Admin Masukan</h2>
+            <h2>🔐 Admin Aduan</h2>
             <input type="password" id="kataSandi" placeholder="Masukkan kata sandi admin">
             <button onclick="login()">Masuk</button>
         </div>
     </div>
 
-    <!-- === HALAMAN ADMIN === -->
+    <!-- ADMIN -->
     <div id="halamanAdmin" class="hidden">
         <div class="container">
             <div class="header">
-                <h1>📋 Masukan Masyarakat<br>Desa Sepadu</h1>
+                <h1>📋 Aduan Masyarakat<br>Desa Sepadu</h1>
                 <button class="btn-keluar" onclick="keluar()">Keluar</button>
             </div>
 
@@ -261,9 +77,9 @@
             <table>
                 <thead>
                     <tr>
-                        <th>No</th>
+                        <th>Token</th>
                         <th>Nama</th>
-                        <th>Pesan</th>
+                        <th>Aduan</th>
                         <th>Tanggal</th>
                         <th>Status</th>
                         <th>Aksi</th>
@@ -276,11 +92,12 @@
         </div>
     </div>
 
-    <!-- === MODAL TULIS RESPON === -->
+    <!-- MODAL TULIS RESPON -->
     <div id="modalBalas" class="modal">
         <div class="modal-content">
             <h3>💬 Berikan Tanggapan</h3>
-            <input type="hidden" id="noAduan">
+            <input type="hidden" id="tokenAduan">
+            <div class="detail-info" id="detailAduan"></div>
             <textarea id="balasanTeks" placeholder="Tuliskan tanggapan untuk masyarakat..."></textarea>
             <div class="modal-buttons">
                 <button class="btn-batal" onclick="tutupModal()">Batal</button>
@@ -290,9 +107,9 @@
     </div>
 
     <script>
-        // === GANTI KATA SANDI & LINK API DI SINI ===
-        const KATA_SANDI_ADMIN = "desa123";
-        const API_URL = "https://script.google.com/macros/s/AKfycbxDtxL2kZtrPfxJHu7GNVrsGwVmuJgSpFc_tQIGBM0ffaax3AKBwQ3UWeNdGQ0wD89T1A/exec"; // ⚠️ Ganti link API kamu!
+        // === PENGATURAN ===
+        const KATA_SANDI_ADMIN = "desa123"; // Ganti dengan sandi kamu
+        const API_URL = "https://script.google.com/macros/s/AKfycbxxxxxxxxx/exec"; // ⚠️ Ganti link API kamu!
 
         let semuaData = [];
 
@@ -329,7 +146,7 @@
             }
         }
 
-        // === TAMPILKAN DATA DENGAN TOMBOL JELAS ===
+        // === TAMPILKAN DATA ===
         function tampilkanData() {
             const tbody = document.getElementById('isiTabel');
             let html = "";
@@ -341,14 +158,10 @@
 
                 html += `
                     <tr>
-                        <td><strong>${item.no}</strong></td>
-                        <td>
-                            <strong>${item.nama}</strong><br>
-                            <small>${item.email || ''}</small><br>
-                            <small>${item.hp || ''}</small>
-                        </td>
-                        <td style="max-width:200px;">${item.pesan}</td>
-                        <td>${item.tanggal}</td>
+                        <td><span class="token">${item.token}</span></td>
+                        <td><strong>${item.nama}</strong><br><small>${item.hp || ''}</small></td>
+                        <td style="max-width:220px;">${item.pesan.substring(0, 40)}${item.pesan.length > 40 ? '...' : ''}</td>
+                        <td><small>${item.tanggal}</small></td>
                         <td><span class="${item.status === 'Belum Direspon' ? 'status-belum' : 'status-sudah'}">${item.status}</span></td>
                         <td>
                             ${item.status === 'Belum Direspon' 
@@ -360,29 +173,36 @@
                 `;
             });
 
-            tbody.innerHTML = html || `<tr><td colspan="6" style="text-align:center;padding:30px;color:#666;">Belum ada masukan</td></tr>`;
+            tbody.innerHTML = html || `<tr><td colspan="6" style="text-align:center;padding:30px;color:#666;">Belum ada aduan</td></tr>`;
             document.getElementById('jumBelum').textContent = `Belum Direspon: ${belum}`;
             document.getElementById('jumSudah').textContent = `Sudah Direspon: ${sudah}`;
         }
 
-        // === BUKA KOTAK TULIS RESPON ===
+        // === BUKA MODAL ===
         function bukaModal(index) {
-            document.getElementById('noAduan').value = semuaData[index].no;
+            const item = semuaData[index];
+            document.getElementById('tokenAduan').value = item.token;
+            document.getElementById('detailAduan').innerHTML = `
+                <strong>Token:</strong> ${item.token}<br>
+                <strong>Nama:</strong> ${item.nama}<br>
+                <strong>Aduan:</strong> ${item.pesan}
+            `;
+            document.getElementById('balasanTeks').value = item.respon_admin || '';
             document.getElementById('modalBalas').classList.add('show');
         }
 
-        // === TUTUP KOTAK ===
+        // === TUTUP MODAL ===
         function tutupModal() {
             document.getElementById('modalBalas').classList.remove('show');
             document.getElementById('balasanTeks').value = "";
         }
 
-        // === SIMPAN RESPON KE GOOGLE SHEETS ===
+        // === KIRIM RESPON KE GOOGLE SHEETS ===
         async function kirimRespon() {
-            const no = document.getElementById('noAduan').value;
-            const balasan = document.getElementById('balasanTeks').value;
+            const token = document.getElementById('tokenAduan').value;
+            const respon = document.getElementById('balasanTeks').value;
 
-            if (!balasan) {
+            if (!respon) {
                 alert("⚠️ Tuliskan tanggapannya terlebih dahulu!");
                 return;
             }
@@ -390,9 +210,9 @@
             try {
                 await fetch(API_URL, {
                     method: 'PUT',
-                    body: JSON.stringify({ no: no, status: 'Sudah Direspon' })
+                    body: JSON.stringify({ token: token, respon: respon })
                 });
-                alert("✅ Respon tersimpan!");
+                alert("✅ Respon tersimpan! Masyarakat bisa cek status dengan tokennya.");
                 tutupModal();
                 muatData();
             } catch (error) {
